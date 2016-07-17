@@ -8,5 +8,17 @@
 
 import Foundation
 
-print("Hello, World!")
+
+var d = Descriptor()
+
+d.append(value: Loot.Kind.amulet.rawValue)
+d.append(value: 1)
+d.append(value: 5)
+d.append(value: 3)
+
+print(d)
+
+let loot = Loot(descriptor: d)
+
+print(loot)
 
