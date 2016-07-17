@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A124F7A81D3AF061004EEAA3 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A124F7A71D3AF061004EEAA3 /* StringExtensions.swift */; };
+		A132242A1D3B26A5003283FB /* Pluralize.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13224291D3B26A5003283FB /* Pluralize.swift */; };
 		A156780B1D360CEB0072C85F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A156780A1D360CEB0072C85F /* main.swift */; };
 		A15678141D360D3D0072C85F /* Loot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15678131D360D3D0072C85F /* Loot.swift */; };
 		A15678161D3611D30072C85F /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15678151D3611D30072C85F /* ArrayExtensions.swift */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		A124F7A71D3AF061004EEAA3 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		A13224291D3B26A5003283FB /* Pluralize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pluralize.swift; sourceTree = "<group>"; };
 		A15678071D360CEB0072C85F /* AllTheLoot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AllTheLoot; sourceTree = BUILT_PRODUCTS_DIR; };
 		A156780A1D360CEB0072C85F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A15678131D360D3D0072C85F /* Loot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Loot.swift; path = Models/Loot.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				A15678151D3611D30072C85F /* ArrayExtensions.swift */,
+				A13224291D3B26A5003283FB /* Pluralize.swift */,
 			);
 			name = Infrastructure;
 			sourceTree = "<group>";
@@ -124,6 +127,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 98G335Y8ST;
 						DevelopmentTeamName = "Andrew Sherwood";
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -150,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A132242A1D3B26A5003283FB /* Pluralize.swift in Sources */,
 				A156780B1D360CEB0072C85F /* main.swift in Sources */,
 				A15678161D3611D30072C85F /* ArrayExtensions.swift in Sources */,
 				A124F7A81D3AF061004EEAA3 /* StringExtensions.swift in Sources */,
@@ -249,6 +254,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -256,6 +262,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

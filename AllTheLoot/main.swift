@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 var d = Descriptor()
 
 d.append(value: Loot.Kind.amulet.rawValue)
@@ -18,7 +17,9 @@ d.append(value: 3)
 
 print(d)
 
-let loot = Loot(descriptor: d)
-
-print(loot)
+for i in 0...10 {
+    let loot = Loot()
+    loot.quantity = Int(arc4random_uniform(14)+1)
+    print(loot)
+}
 

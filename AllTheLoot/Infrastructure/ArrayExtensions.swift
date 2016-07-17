@@ -42,4 +42,30 @@ extension Array {
             return nil
         }
     }
+    
+    func oneIndexAtRandom(strategy:RandomNilStrategy = .never) -> Int? {
+        
+        switch strategy {
+        case .always:
+            return nil
+        case .never:
+            return Int(arc4random_uniform(UInt32(self.count)))
+        case .fiftyFifty:
+            if Int(arc4random_uniform(10)) >= 5 {
+                return Int(arc4random_uniform(UInt32(self.count)))
+            }
+            return nil
+        case .equalChance:
+            let idx = Int(arc4random_uniform(UInt32(self.count+1)))
+            if (idx == self.count) {
+                return nil
+            }
+            return idx
+        case .probability(let value):
+            if Int(arc4random_uniform(100)) > Int(value * 100.0) {
+                return Int(arc4random_uniform(UInt32(self.count)))
+            }
+            return nil
+        }
+    }
 }

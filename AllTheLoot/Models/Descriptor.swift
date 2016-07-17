@@ -43,6 +43,14 @@ struct Descriptor:CustomStringConvertible {
     mutating func append(value:Int) {
         _contents.append(value)
     }
+
+    mutating func append(index:Int?) {
+        if let index = index {
+            _contents.append(index+1)
+        } else {
+            _contents.append(0)
+        }
+    }
 }
 
 class DescriptorIterator {
