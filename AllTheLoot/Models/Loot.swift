@@ -219,21 +219,21 @@ public class Loot:CustomStringConvertible {
             
         case 0:
             let metal = try iterator.nextItem(Loot.Metals)
-            return postProcess("\(metal) ^Amulet")
+            return postProcess("\(metal) ^amulet")
             
         case 1:
             let metal = try iterator.nextOptionalItem(Loot.Metals)
             let characteristic = try iterator.nextItem(Loot.Characteristics)
-            return postProcess("\(metal) ^Amulet of \(characteristic)")
+            return postProcess("\(metal) ^amulet of \(characteristic)")
             
         case 2:
             let gem = try iterator.nextItem(Loot.Gems)
-            return postProcess("\(gem) ^Amulet")
+            return postProcess("\(gem) ^amulet")
             
         case 3:
             let gem = try iterator.nextItem(Loot.Gems)
             let characteristic = try iterator.nextItem(Loot.Characteristics)
-            return postProcess("\(gem) ^Amulet of \(characteristic)")
+            return postProcess("\(gem) ^amulet of \(characteristic)")
             
         case 4:
             return "The Amulet of Yendor"
@@ -399,75 +399,75 @@ public class Loot:CustomStringConvertible {
     }
     
     private static let Weapons = [
-        "^Dagger",
-        "^Knife",
-        "^Axe",
-        "Short ^Sword",
-        "^Broadsword",
-        "Long ^Sword",
-        "^Katana",
-        "^Saber",
-        "^Club",
-        "^Mace",
-        "Morning ^Star",
-        "^Flail",
-        "^Quarterstaff",
-        "^Polearm",
-        "^Spear",
-        "^Bow",
-        "^Crossbow"
+        "^dagger",
+        "^knife",
+        "^axe",
+        "short ^sword",
+        "^broadsword",
+        "long ^sword",
+        "^katana",
+        "^saber",
+        "^club",
+        "^mace",
+        "morning ^star",
+        "^flail",
+        "^quarterstaff",
+        "^polearm",
+        "^spear",
+        "^bow",
+        "^crossbow"
     ]
     
     private static let Armors = [
-        "Armor",
-        "Gauntlets",
-        "^Helm",
-        "Boots"
+        "armor",
+        "gauntlets",
+        "^helm",
+        "boots"
     ]
     
     private static let MonsterParts = [
-        "^Hide",
-        "^Fur",
-        "^Tusk",
-        "^Horn",
-        "^Tooth",
-        "^Bone"
+        "^hide",
+        "^fur",
+        "^tusk",
+        "^horn",
+        "^tooth",
+        "^bone"
     ]
     
     private static let Tools = [
-        "^Saw",
-        "^Axe",
-        "Scissors",
-        "^Hammer",
-        "^Wrench",
-        "Pliers"
+        "^saw",
+        "^axe",
+        "scissors",
+        "^hammer",
+        "^wrench",
+        "pliers"
     ]
     
     private static let Clothes = [
-        "^Shirt",
-        "Trousers",
-        "^Shorts",
-        "Capris",
-        "^Skirt",
-        "^Robe",
-        "^Hood",
-        "^Glove",
-        "^Dress",
-        "^Jacket",
-        "^Vest",
-        "Pajamas",
-        "^Scarf",
-        "^Coat",
-        "^Cap",
-        "^Cape",
-        "^Mask",
-        "^Headband"
+        "^shirt",
+        "trousers",
+        "^shorts",
+        "capris",
+        "^skirt",
+        "^robe",
+        "^hood",
+        "^glove",
+        "^dress",
+        "^jacket",
+        "^vest",
+        "pajamas",
+        "^scarf",
+        "^coat",
+        "^cap",
+        "^cape",
+        "^mask",
+        "^headband"
     ]
     
     private static let Utensils = [
-        "^Fork",
-        "^Spoon",
-        "^Knife"
+        "^fork",
+        "^spoon",
+        "^knife"
     ]
     
     private static let Races = [
@@ -478,198 +478,198 @@ public class Loot:CustomStringConvertible {
         "Demonic",
         "Undead"
     ]
-
+    
     private static let Aspects = [
-        "Shimmering",
-        "Sparkling",
-        "Glittering",
-        "Incandescent",
-        "Glowing",
-        "Dirty",
-        "Dingy",
-        "Shabby",
-        "Faded",
-        "Bright",
-        "Flawless",
-        "Translucent",
-        "Cloudy"
+        "shimmering",
+        "sparkling",
+        "glittering",
+        "incandescent",
+        "glowing",
+        "dirty",
+        "dingy",
+        "shabby",
+        "faded",
+        "bright",
+        "flawless",
+        "translucent",
+        "cloudy"
     ]
     
     private static let Characteristics = [
-        "Healing",
-        "Pain",
-        "Agony",
-        "Hunger",
-        "Strength",
-        "Agility",
-        "Stamina",
-        "Intellect",
-        "Teleportation",
-        "Protection",
-        "Invisibility",
-        "Speed",
-        "Slowness",
-        "Heaviness",
-        "Lightness",
-        "Blundering",
-        "Clumsiness",
-        "Dexterity",
-        "Sleepiness",
-        "Hate",
-        "Amore",
-        "Vigor",
-        "Itching",
-        "Accuracy",
-        "Cowardice",
-        "Inebriation",
-        "Sobriety",
-        "Endurance",
-        "Persuasion",
-        "Polymorphism",
-        "Blindness"
+        "healing",
+        "pain",
+        "agony",
+        "hunger",
+        "strength",
+        "agility",
+        "stamina",
+        "intellect",
+        "teleportation",
+        "protection",
+        "invisibility",
+        "speed",
+        "slowness",
+        "heaviness",
+        "lightness",
+        "blundering",
+        "clumsiness",
+        "dexterity",
+        "sleepiness",
+        "hate",
+        "amore",
+        "vigor",
+        "itching",
+        "accuracy",
+        "cowardice",
+        "inebriation",
+        "sobriety",
+        "endurance",
+        "persuasion",
+        "polymorphism",
+        "blindness"
     ]
-
+    
     private static let Gems = [
-        "Ruby",
-        "Diamond",
-        "Quartz",
-        "Emerald",
-        "Jade",
-        "Opal",
-        "Onyx",
-        "Pearl",
-        "Sapphire",
-        "Topaz",
-        "Turquoise",
-        "Cubit Zirconia"
+        "ruby",
+        "diamond",
+        "quartz",
+        "emerald",
+        "jade",
+        "opal",
+        "onyx",
+        "pearl",
+        "sapphire",
+        "topaz",
+        "turquoise",
+        "cubit zirconia"
     ]
     
     private static let Lengths = [
-        "Short",
-        "Medium",
-        "Long"
+        "short",
+        "medium",
+        "long"
     ]
     
     private static let Sizes = [
-        "Very Small",
-        "Small",
-        "Medium",
-        "Large",
-        "Extra Large",
-        "Extremely Large"
+        "very small",
+        "small",
+        "medium",
+        "large",
+        "extra large",
+        "extremely large"
     ]
     
     private static let Weights = [
-        "Weightless",
-        "Very Light",
-        "Light",
-        "Heavy",
-        "Very Heavy",
-        "Extremely Heavy"
+        "weightless",
+        "very light",
+        "light",
+        "heavy",
+        "very heavy",
+        "extremely heavy"
     ]
     
     public static let Colors = [
-        "White",
-        "Azure",
-        "Blue",
-        "Aquamarine",
-        "Crimson",
-        "Red",
-        "Brown",
-        "Golden",
-        "Green",
-        "Gray",
-        "Lavendar",
-        "Pink",
-        "Indigo",
-        "Green",
-        "Cream",
-        "Eggshell",
-        "Beige",
-        "Ecru",
-        "Turquoise",
-        "Tan",
-        "Teal",
-        "Yellow",
-        "Purple",
-        "Magenta",
-        "Cornflower Blue"
+        "white",
+        "azure",
+        "blue",
+        "aquamarine",
+        "crimson",
+        "red",
+        "brown",
+        "golden",
+        "green",
+        "gray",
+        "lavendar",
+        "pink",
+        "indigo",
+        "green",
+        "cream",
+        "eggshell",
+        "beige",
+        "ecru",
+        "turquoise",
+        "tan",
+        "teal",
+        "yellow",
+        "purple",
+        "magenta",
+        "cornflower blue"
     ]
     
     private static let MetalElements = [
-        "Aluminum",
-        "Titanium",
-        "Vanadium",
-        "Chromium",
-        "Manganese",
-        "Iron",
-        "Cobalt",
-        "Nickel",
-        "Copper",
-        "Zinc",
-        "Gallium",
-        "Yttrium",
-        "Zirconium",
-        "Niobium",
-        "Molybdenum",
-        "Ruthenium",
-        "Rhodium",
-        "Palladium",
-        "Silver",
-        "Cadmium",
-        "Indium",
-        "Tin",
-        "Hafnium",
-        "Tantalum",
-        "Tungsten",
-        "Rhenium",
-        "Osmium",
-        "Iridium",
-        "Platinum",
-        "Gold",
-        "Thallium",
-        "Lead",
-        "Bismuth",
-        "Polonium",
-        "Thorium",
-        "Uranium",
-        "Plutonium"
+        "aluminum",
+        "titanium",
+        "vanadium",
+        "chromium",
+        "manganese",
+        "iron",
+        "cobalt",
+        "nickel",
+        "copper",
+        "zinc",
+        "gallium",
+        "yttrium",
+        "zirconium",
+        "niobium",
+        "molybdenum",
+        "ruthenium",
+        "rhodium",
+        "palladium",
+        "silver",
+        "cadmium",
+        "indium",
+        "tin",
+        "hafnium",
+        "tantalum",
+        "tungsten",
+        "rhenium",
+        "osmium",
+        "iridium",
+        "platinum",
+        "gold",
+        "thallium",
+        "lead",
+        "bismuth",
+        "polonium",
+        "thorium",
+        "uranium",
+        "plutonium"
     ]
-
+    
     private static let Metals = [
-        "Aluminum",
-        "Titanium",
-        "Iron",
-        "Cast Iron",
-        "Silver",
-        "Gold",
-        "Rose Gold",
-        "White Gold",
-        "Platinum",
-        "Copper",
-        "Steel",
-        "Brass",
-        "Nickel",
-        "Zinc",
-        "Tungsten",
-        "Palladium",
-        "Tin",
-        "Bronze",
-        "Pewter",
-        "Sterling Silver"
+        "aluminum",
+        "titanium",
+        "iron",
+        "cast iron",
+        "silver",
+        "gold",
+        "rose gold",
+        "white gold",
+        "platinum",
+        "copper",
+        "steel",
+        "brass",
+        "nickel",
+        "zinc",
+        "tungsten",
+        "palladium",
+        "tin",
+        "bronze",
+        "pewter",
+        "sterling silver"
     ]
     
     private static let Materials = [
-        "Wooden",
-        "Copper",
-        "Brass",
-        "Bronze",
-        "Silver",
-        "Gold",
-        "Quartz",
-        "Glass",
-        "Rubber",
-        "Bone"
+        "wooden",
+        "copper",
+        "brass",
+        "bronze",
+        "silver",
+        "gold",
+        "quartz",
+        "glass",
+        "rubber",
+        "bone"
     ]
     
     private static let Topics = [
@@ -711,33 +711,33 @@ public class Loot:CustomStringConvertible {
     ]
     
     private static let Mails = [
-        "Fur",
-        "Leather",
-        "Bone",
-        "Scale Mail",
-        "Plate Mail",
-        "Chain Mail",
-        "Banded Mail"
+        "fur",
+        "leather",
+        "bone",
+        "scale mail",
+        "plate mail",
+        "chain mail",
+        "banded mail"
     ]
     
     private static let VowelPrefixes = [
-        "Alum",
-        "Aqua",
-        "Azur",
-        "Ecru",
-        "Eggs",
+        "alum",
+        "aqua",
+        "azur",
+        "ecru",
+        "eggs",
         "Elve",
-        "Emer",
-        "Endu",
-        "Extr",
-        "Inca",
-        "Indi",
-        "Irid",
-        "Iron",
-        "Onyx",
-        "Opal",
+        "emer",
+        "endu",
+        "extr",
+        "inca",
+        "indi",
+        "irid",
+        "iron",
+        "onyx",
+        "opal",
         "Orci",
-        "Osmi",
+        "osmi",
         "Unde"
     ]
     
@@ -765,25 +765,25 @@ public class Loot:CustomStringConvertible {
         
         public var description:String {
             switch self {
-            case weapon: return "Weapon"
-            case armor: return "Armor"
-            case monsterPart: return "Monster Part"
-            case tool: return "Tool"
-            case scroll: return "Scroll"
-            case wand: return "Wand"
-            case potion: return "Potion"
-            case amulet: return "Amulet"
-            case ring: return "Ring"
-            case bracelet: return "Bracelet"
-            case necklace: return "Necklace"
-            case staff: return "Staff"
-            case key: return "Key"
-            case ammunition: return "Ammunition"
-            case gemstone: return "Gemstone"
-            case ore: return "Ore"
-            case clothes: return "Clothes"
-            case book: return "Book"
-            case utensil: return "Utensil"
+            case weapon: return "weapon"
+            case armor: return "armor"
+            case monsterPart: return "monster part"
+            case tool: return "tool"
+            case scroll: return "scroll"
+            case wand: return "wand"
+            case potion: return "potion"
+            case amulet: return "amulet"
+            case ring: return "ring"
+            case bracelet: return "bracelet"
+            case necklace: return "necklace"
+            case staff: return "staff"
+            case key: return "key"
+            case ammunition: return "ammunition"
+            case gemstone: return "gemstone"
+            case ore: return "ore"
+            case clothes: return "clothes"
+            case book: return "book"
+            case utensil: return "utensil"
             }
         }
         
