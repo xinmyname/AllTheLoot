@@ -9,22 +9,17 @@
 import Foundation
 
 extension String {
-    func fixSpace() -> String {
-        var found = false
-        var text = self
+    func starts(withAny prefixes:[String]) -> Bool {
         
-        while !found {
+        for prefix in prefixes {
             
-            if let r:Range<String.Index> = text.range(of: "?") {
-                
-                text.remove(at: r.lowerBound)
-                text.remove(at: r.lowerBound)
-                
-            } else {
-                found = true
+            if let range = self.range(of: prefix) {
+                if range.lowerBound == self.startIndex {
+                    return true
+                }
             }
         }
         
-        return text
+        return false
     }
 }

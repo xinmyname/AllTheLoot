@@ -354,8 +354,14 @@ public class Loot:CustomStringConvertible {
             let startIndex = pluralRange.lowerBound
             
             if self.quantity == 1 {
+                
                 text.remove(at: startIndex)
-                return text
+                
+                let quantityText = text.starts(withAny: Loot.VowelPrefixes)
+                    ? "An"
+                    : "A"
+                
+                return "\(quantityText) \(text)"
             }
             
             var singular = text.substring(from: pluralRange.upperBound)
@@ -712,6 +718,27 @@ public class Loot:CustomStringConvertible {
         "Plate Mail",
         "Chain Mail",
         "Banded Mail"
+    ]
+    
+    private static let VowelPrefixes = [
+        "Alum",
+        "Aqua",
+        "Azur",
+        "Ecru",
+        "Eggs",
+        "Elve",
+        "Emer",
+        "Endu",
+        "Extr",
+        "Inca",
+        "Indi",
+        "Irid",
+        "Iron",
+        "Onyx",
+        "Opal",
+        "Orci",
+        "Osmi",
+        "Unde"
     ]
     
     public enum Kind:Int,CustomStringConvertible {

@@ -19,7 +19,7 @@ print(d)
 
 for i in 0...10 {
     let loot = Loot()
-    loot.quantity = Int(arc4random_uniform(14)+1)
+    loot.quantity = Int(arc4random_uniform(3)+1)
     print(loot)
 }
 
