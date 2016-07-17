@@ -16,7 +16,7 @@ public class Loot:CustomStringConvertible {
     public var quantity:Int = 1
 
     init() {
-        let kind = Kind.weapon
+        let kind = Kind.armor
         _descriptor = Descriptor(array: [kind.rawValue])
         
         switch kind {
@@ -89,7 +89,7 @@ public class Loot:CustomStringConvertible {
         }
     }
 
-    func makeWeapon() {
+    private func makeWeapon() {
         
         let style = Int(arc4random_uniform(2))
         
@@ -110,7 +110,7 @@ public class Loot:CustomStringConvertible {
         _descriptor.append(index: Loot.Weapons.oneIndexAtRandom())
     }
     
-    func describeWeapon(iterator:DescriptorIterator) throws -> String {
+    private func describeWeapon(iterator:DescriptorIterator) throws -> String {
         
         let style:Int = try iterator.next()
         
@@ -134,55 +134,94 @@ public class Loot:CustomStringConvertible {
     
     }
     
-    func makeArmor() {
+    private func makeArmor() {
         
+        let style = Int(arc4random_uniform(2))
+        
+        _descriptor.append(value: style)
+        
+        switch style {
+            
+        case 0:
+            _descriptor.append(index: Loot.Aspects.oneIndexAtRandom(strategy: .equalChance))
+            _descriptor.append(index: Loot.Races.oneIndexAtRandom(strategy: .equalChance))
+            _descriptor.append(index: Loot.Mails.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Armors.oneIndexAtRandom())
+            
+        case 1:
+            _descriptor.append(index: Loot.Aspects.oneIndexAtRandom(strategy: .equalChance))
+            _descriptor.append(index: Loot.Races.oneIndexAtRandom(strategy: .equalChance))
+            _descriptor.append(index: Loot.Materials.oneIndexAtRandom())
+            
+        default:break
+            
+        }
     }
 
-    func describeArmor(iterator:DescriptorIterator) throws -> String {
-        return ""
+    private func describeArmor(iterator:DescriptorIterator) throws -> String {
+        let style:Int = try iterator.next()
+        
+        switch style {
+            
+        case 0:
+            let aspect = try iterator.nextOptionalItem(Loot.Aspects)
+            let race = try iterator.nextOptionalItem(Loot.Races)
+            let mail = try iterator.nextItem(Loot.Mails)
+            let armor = try iterator.nextItem(Loot.Armors)
+            return postProcess("\(aspect) \(race) \(mail) \(armor)")
+            
+        case 1:
+            let aspect = try iterator.nextOptionalItem(Loot.Aspects)
+            let race = try iterator.nextOptionalItem(Loot.Races)
+            let material = try iterator.nextItem(Loot.Materials)
+            return postProcess("\(aspect) \(race) \(material) ^shield")
+            
+        default:
+            return ""
+        }
     }
     
-    func makeMonsterPart() {
+    private func makeMonsterPart() {
         
     }
     
-    func describeMonsterPart(iterator:DescriptorIterator) throws -> String {
+    private func describeMonsterPart(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeTool() {
+    private func makeTool() {
         
     }
     
-    func describeTool(iterator:DescriptorIterator) throws -> String {
+    private func describeTool(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeScroll() {
+    private func makeScroll() {
         
     }
     
-    func describeScroll(iterator:DescriptorIterator) throws -> String {
+    private func describeScroll(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeWand() {
+    private func makeWand() {
         
     }
     
-    func describeWand(iterator:DescriptorIterator) throws -> String {
+    private func describeWand(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makePotion() {
+    private func makePotion() {
         
     }
     
-    func describePotion(iterator:DescriptorIterator) throws -> String {
+    private func describePotion(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeAmulet() {
+    private func makeAmulet() {
         
         let randomStyle = arc4random_uniform(4001)
         let style = (randomStyle != 4000)
@@ -211,7 +250,7 @@ public class Loot:CustomStringConvertible {
         }
     }
     
-    func describeAmulet(iterator:DescriptorIterator) throws -> String {
+    private func describeAmulet(iterator:DescriptorIterator) throws -> String {
         
         let style:Int = try iterator.next()
         
@@ -244,91 +283,91 @@ public class Loot:CustomStringConvertible {
         }
     }
     
-    func makeRing() {
+    private func makeRing() {
         
     }
     
-    func describeRing(iterator:DescriptorIterator) throws -> String {
+    private func describeRing(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeBracelet() {
+    private func makeBracelet() {
         
     }
     
-    func describeBracelet(iterator:DescriptorIterator) throws -> String {
+    private func describeBracelet(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeNecklace() {
+    private func makeNecklace() {
         
     }
     
-    func describeNecklace(iterator:DescriptorIterator) throws -> String {
+    private func describeNecklace(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeStaff() {
+    private func makeStaff() {
         
     }
     
-    func describeStaff(iterator:DescriptorIterator) throws -> String {
+    private func describeStaff(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeKey() {
+    private func makeKey() {
         
     }
     
-    func describeKey(iterator:DescriptorIterator) throws -> String {
+    private func describeKey(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeAmmunition() {
+    private func makeAmmunition() {
         
     }
     
-    func describeAmmunition(iterator:DescriptorIterator) throws -> String {
+    private func describeAmmunition(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeGemstone() {
+    private func makeGemstone() {
         
     }
     
-    func describeGemstone(iterator:DescriptorIterator) throws -> String {
+    private func describeGemstone(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeOre() {
+    private func makeOre() {
         
     }
     
-    func describeOre(iterator:DescriptorIterator) throws -> String {
+    private func describeOre(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeClothes() {
+    private func makeClothes() {
         
     }
     
-    func describeClothes(iterator:DescriptorIterator) throws -> String {
+    private func describeClothes(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeBook() {
+    private func makeBook() {
         
     }
     
-    func describeBook(iterator:DescriptorIterator) throws -> String {
+    private func describeBook(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
-    func makeUtensil() {
+    private func makeUtensil() {
         
     }
     
-    func describeUtensil(iterator:DescriptorIterator) throws -> String {
+    private func describeUtensil(iterator:DescriptorIterator) throws -> String {
         return ""
     }
     
@@ -393,6 +432,12 @@ public class Loot:CustomStringConvertible {
             }
             
             text = "\(quantityText) \(text)"
+            
+        } else {
+            let firstLetter = text.characters.first!
+            let capitalLetter = String(firstLetter).capitalized
+            text.remove(at: text.startIndex)
+            text.insert(capitalLetter.characters.first!, at: text.startIndex)
         }
         
         return text
@@ -419,7 +464,7 @@ public class Loot:CustomStringConvertible {
     ]
     
     private static let Armors = [
-        "armor",
+        "armor ^set",
         "gauntlets",
         "^helm",
         "boots"

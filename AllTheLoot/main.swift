@@ -10,12 +10,17 @@ import Foundation
 
 var d = Descriptor()
 
-d.append(value: Loot.Kind.amulet.rawValue)
-d.append(value: 1)
+d.append(value: Loot.Kind.armor.rawValue)
+d.append(value: 0)
 d.append(value: 5)
+d.append(value: 1)
 d.append(value: 3)
+d.append(value: 4)
 
 print(d)
+let l = Loot(descriptor: d, quantity: 1)
+print(l)
+
 
 for i in 0...10 {
     let loot = Loot()
