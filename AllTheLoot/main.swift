@@ -17,10 +17,9 @@ d.append(value: 1)
 d.append(value: 3)
 d.append(value: 4)
 
-print(d)
-let l = Loot(descriptor: d, quantity: 1)
-print(l)
-
+//print(d)
+//let l = Loot(descriptor: d, quantity: 1)
+//print(l)
 
 for i in 0...10 {
     let loot = Loot()

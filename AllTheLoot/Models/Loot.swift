@@ -16,7 +16,7 @@ public class Loot:CustomStringConvertible {
     public var quantity:Int = 1
 
     init() {
-        let kind = Kind.armor
+        let kind = Kind.necklace
         _descriptor = Descriptor(array: [kind.rawValue])
         
         switch kind {
@@ -95,13 +95,13 @@ public class Loot:CustomStringConvertible {
         
         _descriptor.append(value: style)
 
-        _descriptor.append(index: Loot.Weights.oneIndexAtRandom(strategy: .equalChance))
+        _descriptor.append(index: Loot.Weights.oneIndexAtRandom(nilStrategy: .equalChance))
         
         switch style {
         
-        case 0: _descriptor.append(index: Loot.Races.oneIndexAtRandom(strategy: .equalChance))
+        case 0: _descriptor.append(index: Loot.Races.oneIndexAtRandom(nilStrategy: .equalChance))
         
-        case 1: _descriptor.append(index: Loot.Materials.oneIndexAtRandom(strategy: .equalChance))
+        case 1: _descriptor.append(index: Loot.Materials.oneIndexAtRandom(nilStrategy: .equalChance))
         
         default:break
         
@@ -143,14 +143,14 @@ public class Loot:CustomStringConvertible {
         switch style {
             
         case 0:
-            _descriptor.append(index: Loot.Aspects.oneIndexAtRandom(strategy: .equalChance))
-            _descriptor.append(index: Loot.Races.oneIndexAtRandom(strategy: .equalChance))
+            _descriptor.append(index: Loot.Aspects.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Races.oneIndexAtRandom(nilStrategy: .equalChance))
             _descriptor.append(index: Loot.Mails.oneIndexAtRandom())
             _descriptor.append(index: Loot.Armors.oneIndexAtRandom())
             
         case 1:
-            _descriptor.append(index: Loot.Aspects.oneIndexAtRandom(strategy: .equalChance))
-            _descriptor.append(index: Loot.Races.oneIndexAtRandom(strategy: .equalChance))
+            _descriptor.append(index: Loot.Aspects.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Races.oneIndexAtRandom(nilStrategy: .equalChance))
             _descriptor.append(index: Loot.Materials.oneIndexAtRandom())
             
         default:break
@@ -183,42 +183,88 @@ public class Loot:CustomStringConvertible {
     
     private func makeMonsterPart() {
         
+        _descriptor.append(index: Loot.Colors.oneIndexAtRandom())
+        _descriptor.append(index: Loot.MonsterParts.oneIndexAtRandom())
     }
     
     private func describeMonsterPart(iterator:DescriptorIterator) throws -> String {
-        return ""
+        
+        let color = try iterator.nextItem(Loot.Colors)
+        let part = try iterator.nextItem(Loot.MonsterParts)
+        return postProcess("\(color) monster \(part)")
     }
     
     private func makeTool() {
-        
+        _descriptor.append(index: Loot.Weights.oneIndexAtRandom(nilStrategy: .equalChance))
+        _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+        _descriptor.append(index: Loot.Tools.oneIndexAtRandom())
     }
     
     private func describeTool(iterator:DescriptorIterator) throws -> String {
-        return ""
+        let weight = try iterator.nextOptionalItem(Loot.Weights)
+        let metal = try iterator.nextItem(Loot.Metals)
+        let tool = try iterator.nextItem(Loot.Tools)
+        return postProcess("\(weight) \(metal) \(tool)")
     }
     
     private func makeScroll() {
-        
+        _descriptor.append(index: Loot.Enchantments.oneIndexAtRandom(nilStrategy: .probability(value:0.80)))
+        _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
     }
     
     private func describeScroll(iterator:DescriptorIterator) throws -> String {
-        return ""
+        let enchantment = try iterator.nextOptionalItem(Loot.Enchantments)
+        let characteristic = try iterator.nextItem(Loot.Characteristics)
+        return postProcess("\(enchantment) ^scroll of \(characteristic)")
     }
     
     private func makeWand() {
+        let style = Int(arc4random_uniform(2))
         
+        _descriptor.append(value: style)
+        _descriptor.append(index: Loot.Enchantments.oneIndexAtRandom(nilStrategy: .probability(value:0.90)))
+
+        switch style {
+        
+        case 0:
+            _descriptor.append(index: Loot.Materials.oneIndexAtRandom())
+        case 1:
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+        default:
+            break
+        }
+
+        _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
     }
     
     private func describeWand(iterator:DescriptorIterator) throws -> String {
-        return ""
+        
+        let style:Int = try iterator.next()
+        let enchantment = try iterator.nextOptionalItem(Loot.Enchantments)
+
+        switch style {
+        case 0:
+            let material = try iterator.nextItem(Loot.Materials)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(enchantment) \(material) ^wand of \(characteristic)")
+        case 1:
+            let metal = try iterator.nextItem(Loot.Metals)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(enchantment) \(metal) ^wand of \(characteristic)")
+        default:
+            return ""
+        }
     }
     
     private func makePotion() {
-        
+        _descriptor.append(index: Loot.Colors.oneIndexAtRandom())
+        _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
     }
     
     private func describePotion(iterator:DescriptorIterator) throws -> String {
-        return ""
+        let color = try iterator.nextItem(Loot.Colors)
+        let characteristic = try iterator.nextItem(Loot.Characteristics)
+        return postProcess("\(color) ^potion of \(characteristic)")
     }
     
     private func makeAmulet() {
@@ -236,7 +282,7 @@ public class Loot:CustomStringConvertible {
             _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
         
         case 1:
-            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(strategy: .equalChance))
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(nilStrategy: .equalChance))
             _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
         
         case 2:
@@ -284,27 +330,205 @@ public class Loot:CustomStringConvertible {
     }
     
     private func makeRing() {
+        let style = Int(arc4random_uniform(6))
+        
+        _descriptor.append(value: style)
+        
+        switch style {
+            
+        case 0:
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+            
+        case 1:
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
+            
+        case 2:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            
+        case 3:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
+           
+        case 4:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+            
+        case 5:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
+            
+        default:
+            break
+        }
         
     }
     
     private func describeRing(iterator:DescriptorIterator) throws -> String {
-        return ""
+        let style:Int = try iterator.next()
+        
+        switch style {
+            
+        case 0:
+            let metal = try iterator.nextItem(Loot.Metals)
+            return postProcess("\(metal) ^ring")
+            
+        case 1:
+            let metal = try iterator.nextOptionalItem(Loot.Metals)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(metal) ^ring of \(characteristic)")
+            
+        case 2:
+            let gem = try iterator.nextItem(Loot.Gems)
+            return postProcess("\(gem) ^ring")
+            
+        case 3:
+            let gem = try iterator.nextItem(Loot.Gems)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(gem) ^ring of \(characteristic)")
+            
+        case 4:
+            let gem = try iterator.nextItem(Loot.Gems)
+            let metal = try iterator.nextItem(Loot.Metals)
+            return postProcess("\(gem) encrusted \(metal) ^ring")
+
+        case 5:
+            let gem = try iterator.nextItem(Loot.Gems)
+            let metal = try iterator.nextOptionalItem(Loot.Metals)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(gem) encrusted \(metal) ^ring of \(characteristic)")
+            
+        default:
+            return ""
+            
+        }
     }
     
     private func makeBracelet() {
+        let style = Int(arc4random_uniform(4))
         
+        _descriptor.append(value: style)
+        
+        switch style {
+            
+        case 0:
+            _descriptor.append(index: Loot.Weights.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+            
+        case 1:
+            _descriptor.append(index: Loot.Weights.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
+            
+        case 2:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+            
+        case 3:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
+            
+        default:
+            break
+        }
     }
     
     private func describeBracelet(iterator:DescriptorIterator) throws -> String {
-        return ""
+        let style:Int = try iterator.next()
+        
+        switch style {
+            
+        case 0:
+            let weight = try iterator.nextOptionalItem(Loot.Weights)
+            let metal = try iterator.nextItem(Loot.Metals)
+            return postProcess("\(weight) \(metal) ^bracelet")
+            
+        case 1:
+            let weight = try iterator.nextOptionalItem(Loot.Weights)
+            let metal = try iterator.nextOptionalItem(Loot.Metals)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(weight) \(metal) ^bracelet of \(characteristic)")
+            
+        case 2:
+            let gem = try iterator.nextItem(Loot.Gems)
+            let metal = try iterator.nextItem(Loot.Metals)
+            return postProcess("\(gem) encrusted \(metal) ^bracelet")
+            
+        case 3:
+            let gem = try iterator.nextItem(Loot.Gems)
+            let metal = try iterator.nextOptionalItem(Loot.Metals)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(gem) encrusted \(metal) ^bracelet of \(characteristic)")
+
+        default:
+            return ""
+            
+        }
     }
     
     private func makeNecklace() {
+        let style = Int(arc4random_uniform(4))
         
+        _descriptor.append(value: style)
+        
+        switch style {
+            
+        case 0:
+            _descriptor.append(index: Loot.Weights.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+            
+        case 1:
+            _descriptor.append(index: Loot.Weights.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
+            
+        case 2:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom())
+            
+        case 3:
+            _descriptor.append(index: Loot.Gems.oneIndexAtRandom())
+            _descriptor.append(index: Loot.Metals.oneIndexAtRandom(nilStrategy: .equalChance))
+            _descriptor.append(index: Loot.Characteristics.oneIndexAtRandom())
+            
+        default:
+            break
+        }
     }
     
     private func describeNecklace(iterator:DescriptorIterator) throws -> String {
-        return ""
+        let style:Int = try iterator.next()
+        
+        switch style {
+            
+        case 0:
+            let weight = try iterator.nextOptionalItem(Loot.Weights)
+            let metal = try iterator.nextItem(Loot.Metals)
+            return postProcess("\(weight) \(metal) ^necklace")
+            
+        case 1:
+            let weight = try iterator.nextOptionalItem(Loot.Weights)
+            let metal = try iterator.nextOptionalItem(Loot.Metals)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(weight) \(metal) ^necklace of \(characteristic)")
+            
+        case 2:
+            let gem = try iterator.nextItem(Loot.Gems)
+            let metal = try iterator.nextItem(Loot.Metals)
+            return postProcess("\(gem) encrusted \(metal) ^necklace")
+            
+        case 3:
+            let gem = try iterator.nextItem(Loot.Gems)
+            let metal = try iterator.nextOptionalItem(Loot.Metals)
+            let characteristic = try iterator.nextItem(Loot.Characteristics)
+            return postProcess("\(gem) encrusted \(metal) ^necklace of \(characteristic)")
+            
+        default:
+            return ""
+            
+        }
     }
     
     private func makeStaff() {
@@ -784,6 +1008,11 @@ public class Loot:CustomStringConvertible {
         "Orci",
         "osmi",
         "Unde"
+    ]
+    
+    private static let Enchantments = [
+        "blessed",
+        "cursed"
     ]
     
     public enum Kind:Int,CustomStringConvertible {

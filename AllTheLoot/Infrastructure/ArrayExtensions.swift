@@ -17,7 +17,7 @@ enum RandomNilStrategy {
 }
 
 extension Array {
-    func oneAtRandom(strategy:RandomNilStrategy = .never) -> Element? {
+    func oneAtRandom(nilStrategy strategy:RandomNilStrategy = .never) -> Element? {
         
         switch strategy {
         case .always:
@@ -43,7 +43,7 @@ extension Array {
         }
     }
     
-    func oneIndexAtRandom(strategy:RandomNilStrategy = .never) -> Int? {
+    func oneIndexAtRandom(nilStrategy strategy:RandomNilStrategy = .never) -> Int? {
         
         switch strategy {
         case .always:
