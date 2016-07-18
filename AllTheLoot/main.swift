@@ -21,7 +21,7 @@ d.append(value: 4)
 //let l = Loot(descriptor: d, quantity: 1)
 //print(l)
 
-for i in 0...10 {
+for i in 0...100 {
     let loot = Loot()
     loot.quantity = Int(arc4random_uniform(3)+1)
     print(loot)
