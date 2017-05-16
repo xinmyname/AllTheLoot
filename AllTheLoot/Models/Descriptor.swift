@@ -55,8 +55,8 @@ struct Descriptor:CustomStringConvertible {
 
 class DescriptorIterator {
     
-    enum NoMoreItems:ErrorProtocol { case error }
-    enum InvalidLootKind:ErrorProtocol { case error }
+    enum NoMoreItems:Error { case error }
+    enum InvalidLootKind:Error { case error }
     
     private var _it:IndexingIterator<[Int]>
     

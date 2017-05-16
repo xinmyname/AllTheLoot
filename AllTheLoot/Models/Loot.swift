@@ -84,7 +84,7 @@ public class Loot:CustomStringConvertible {
             case .utensil: return try describeUtensil(iterator:it)
             }
         }
-        catch let error as NSError {
+        catch {
             return "(error: \(error.localizedDescription))"
         }
     }
@@ -1183,25 +1183,25 @@ public class Loot:CustomStringConvertible {
         
         public var description:String {
             switch self {
-            case weapon: return "weapon"
-            case armor: return "armor"
-            case monsterPart: return "monster part"
-            case tool: return "tool"
-            case scroll: return "scroll"
-            case wand: return "wand"
-            case potion: return "potion"
-            case amulet: return "amulet"
-            case ring: return "ring"
-            case bracelet: return "bracelet"
-            case necklace: return "necklace"
-            case staff: return "staff"
-            case key: return "key"
-            case ammunition: return "ammunition"
-            case gemstone: return "gemstone"
-            case ore: return "ore"
-            case clothes: return "clothes"
-            case book: return "book"
-            case utensil: return "utensil"
+            case .weapon: return "weapon"
+            case .armor: return "armor"
+            case .monsterPart: return "monster part"
+            case .tool: return "tool"
+            case .scroll: return "scroll"
+            case .wand: return "wand"
+            case .potion: return "potion"
+            case .amulet: return "amulet"
+            case .ring: return "ring"
+            case .bracelet: return "bracelet"
+            case .necklace: return "necklace"
+            case .staff: return "staff"
+            case .key: return "key"
+            case .ammunition: return "ammunition"
+            case .gemstone: return "gemstone"
+            case .ore: return "ore"
+            case .clothes: return "clothes"
+            case .book: return "book"
+            case .utensil: return "utensil"
             }
         }
         
